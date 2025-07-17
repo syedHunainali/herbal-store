@@ -21,7 +21,101 @@
   </header>
   <main>
     <h1>Your Cart</h1>
-    <p>No items in cart yet.</p>
+    <p>🛒 آپ کا ٹوکرا (Your Shopping Basket) 🛒</p>
+    
+    <div class="cart-items">
+      <div class="cart-item">
+        <div class="item-details">
+          <h3>🌿 Premium Turmeric (ہلدی)</h3>
+          <p>100% pure organic turmeric powder</p>
+          <div class="item-quantity">
+            <button class="quantity-btn" onclick="updateQuantity('turmeric', -1)">-</button>
+            <span id="turmeric-qty">1</span>
+            <button class="quantity-btn" onclick="updateQuantity('turmeric', 1)">+</button>
+          </div>
+        </div>
+        <div class="item-price">
+          <strong>Rs. <span id="turmeric-price">250</span></strong>
+        </div>
+      </div>
+      
+      <div class="cart-item">
+        <div class="item-details">
+          <h3>🌿 Organic Cardamom (ایلائچی)</h3>
+          <p>Fresh green cardamom pods</p>
+          <div class="item-quantity">
+            <button class="quantity-btn" onclick="updateQuantity('cardamom', -1)">-</button>
+            <span id="cardamom-qty">1</span>
+            <button class="quantity-btn" onclick="updateQuantity('cardamom', 1)">+</button>
+          </div>
+        </div>
+        <div class="item-price">
+          <strong>Rs. <span id="cardamom-price">800</span></strong>
+        </div>
+      </div>
+      
+      <div class="cart-item">
+        <div class="item-details">
+          <h3>🌿 Black Cumin Seeds (کلونجی)</h3>
+          <p>Premium quality black cumin seeds</p>
+          <div class="item-quantity">
+            <button class="quantity-btn" onclick="updateQuantity('cumin', -1)">-</button>
+            <span id="cumin-qty">1</span>
+            <button class="quantity-btn" onclick="updateQuantity('cumin', 1)">+</button>
+          </div>
+        </div>
+        <div class="item-price">
+          <strong>Rs. <span id="cumin-price">180</span></strong>
+        </div>
+      </div>
+    </div>
+    
+    <div class="cart-total">
+      <h3>Total: Rs. <span id="total-amount">1,230</span></h3>
+      <p>Free delivery within Karachi for orders above Rs. 1,000</p>
+    </div>
+    
+    <a href="checkout.html">
+      <button class="checkout-btn">Proceed to Checkout (چیک آؤٹ کریں)</button>
+    </a>
+    
+    <div style="text-align: center; margin-top: 20px;">
+      <a href="products.html"><button>Continue Shopping</button></a>
+    </div>
   </main>
+
+  <script>
+    // Product prices
+    const productPrices = {
+      turmeric: 250,
+      cardamom: 800,
+      cumin: 180
+    };
+
+    function updateQuantity(product, change) {
+      const qtyElement = document.getElementById(product + '-qty');
+      const priceElement = document.getElementById(product + '-price');
+      
+      let currentQty = parseInt(qtyElement.textContent);
+      let newQty = currentQty + change;
+      
+      // Minimum quantity is 1
+      if (newQty < 1) newQty = 1;
+      
+      qtyElement.textContent = newQty;
+      priceElement.textContent = productPrices[product] * newQty;
+      
+      updateTotal();
+    }
+
+    function updateTotal() {
+      const turmericTotal = productPrices.turmeric * parseInt(document.getElementById('turmeric-qty').textContent);
+      const cardamomTotal = productPrices.cardamom * parseInt(document.getElementById('cardamom-qty').textContent);
+      const cuminTotal = productPrices.cumin * parseInt(document.getElementById('cumin-qty').textContent);
+      
+      const total = turmericTotal + cardamomTotal + cuminTotal;
+      document.getElementById('total-amount').textContent = total;
+    }
+  </script>
 </body>
 </html>
