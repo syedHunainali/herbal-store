@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - Herbal Store</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Shop</a></li>
+        <li><a href="categories.html">Categories</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <h1>Checkout</h1>
+    <p>🛒 آرڈر مکمل کریں - Complete Your Order 🛒</p>
+    <p>Finalize your purchase of authentic Karachi pansar products</p>
+    
+    <div class="checkout-container">
+      <!-- Order Summary Section -->
+      <div class="order-summary">
+        <h2>Order Summary</h2>
+        <div class="summary-item">
+          <span>🌿 Premium Turmeric (ہلدی)</span>
+          <span>Rs. 250</span>
+        </div>
+        <div class="summary-item">
+          <span>🌿 Organic Cardamom (ایلائچی)</span>
+          <span>Rs. 800</span>
+        </div>
+        <div class="summary-item">
+          <span>🌿 Black Cumin Seeds (کلونجی)</span>
+          <span>Rs. 180</span>
+        </div>
+        <div class="summary-divider"></div>
+        <div class="summary-item total">
+          <span><strong>Total Amount:</strong></span>
+          <span><strong>Rs. 1,230</strong></span>
+        </div>
+      </div>
+
+      <!-- Checkout Form Section -->
+      <div class="checkout-form">
+        <h2>Shipping Information</h2>
+        <form id="checkoutForm">
+          <div class="form-row">
+            <input type="text" placeholder="First Name (پہلا نام)" required />
+            <input type="text" placeholder="Last Name (آخری نام)" required />
+          </div>
+          <input type="email" placeholder="Email Address (ای میل)" required />
+          <input type="tel" placeholder="Phone Number (فون نمبر)" required />
+          <textarea placeholder="Complete Address (مکمل پتہ)" rows="3" required></textarea>
+          <input type="text" placeholder="City (شہر)" required />
+          <input type="text" placeholder="Postal Code (پوسٹل کوڈ)" required />
+          
+          <h3>Payment Method</h3>
+          <div class="payment-options">
+            <div class="payment-option">
+              <input type="radio" id="cod" name="payment" value="cod" checked />
+              <label for="cod">💰 Cash on Delivery (ڈلیوری پر ادائیگی)</label>
+            </div>
+            <div class="payment-option">
+              <input type="radio" id="jazzcash" name="payment" value="jazzcash" />
+              <label for="jazzcash">📱 JazzCash</label>
+            </div>
+            <div class="payment-option">
+              <input type="radio" id="easypaisa" name="payment" value="easypaisa" />
+              <label for="easypaisa">💳 EasyPaisa</label>
+            </div>
+            <div class="payment-option">
+              <input type="radio" id="bank" name="payment" value="bank" />
+              <label for="bank">🏦 Bank Transfer</label>
+            </div>
+          </div>
+          
+          <div class="special-instructions">
+            <h3>Special Instructions</h3>
+            <textarea placeholder="Any special requests or delivery instructions... (خصوصی ہدایات)" rows="2"></textarea>
+          </div>
+          
+          <div class="checkout-buttons">
+            <a href="cart.html"><button type="button" class="back-btn">← Back to Cart</button></a>
+            <button type="submit" class="place-order-btn">Place Order (آرڈر دیں)</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Order Confirmation Modal (hidden by default) -->
+    <div id="orderModal" class="modal">
+      <div class="modal-content">
+        <h2>✅ Order Confirmed!</h2>
+        <p>🎉 آپ کا آرڈر کامیاب رہا!</p>
+        <p>Thank you for choosing our authentic Karachi pansar products!</p>
+        <div class="order-details">
+          <p><strong>Order ID:</strong> <span id="orderId"></span></p>
+          <p><strong>Estimated Delivery:</strong> 2-3 business days</p>
+          <p><strong>Total Amount:</strong> Rs. 1,230</p>
+        </div>
+        <p>We'll contact you soon to confirm your order and delivery details.</p>
+        <button onclick="closeModal()" class="modal-btn">Continue Shopping</button>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Generate random order ID
+    function generateOrderId() {
+      return 'KP' + Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+    }
+
+    // Handle form submission
+    document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Generate order ID
+      const orderId = generateOrderId();
+      document.getElementById('orderId').textContent = orderId;
+      
+      // Show confirmation modal
+      document.getElementById('orderModal').style.display = 'block';
+    });
+
+    // Close modal function
+    function closeModal() {
+      document.getElementById('orderModal').style.display = 'none';
+      window.location.href = 'index.html';
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      const modal = document.getElementById('orderModal');
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
+  </script>
+</body>
+</html>
